@@ -8,6 +8,7 @@ dist/
 dist-ssr/
 
 # Python & Django
+backend/
 __pycache__/
 **/__pycache__/
 *.py[cod]
