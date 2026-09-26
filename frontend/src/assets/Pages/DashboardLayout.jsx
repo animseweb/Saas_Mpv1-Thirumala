@@ -125,16 +125,25 @@ const ChevronsRightIcon = () => (
 );
 
 /* ==========================================================================
-   NAVIGATION CONFIGURATION
+   NAVIGATION CONFIGURATION (Exact match to Image 1)
    ========================================================================== */
-const NAV_ITEMS_MAIN = [
-  { id: "dashboard", label: "Dashboard", icon: DashboardIcon, path: "/dashboard" },
-  { id: "invoice", label: "Invoice", icon: InvoiceIcon, path: "/invoice" },
-  { id: "tax", label: "Tax / GST", icon: TaxIcon, path: "/tax" },
-  { id: "company", label: "Company", icon: CompanyIcon, path: "/company" },
-  { id: "product", label: "Product", icon: ProductIcon, path: "/product" },
-  { id: "customers", label: "Customers", icon: CustomersIcon, path: "/customers" },
-  { id: "reports", label: "Reports", icon: ReportsIcon, path: "/reports" },
+const NAV_SECTIONS = [
+  {
+    category: "SALES",
+    items: [
+      { id: "dashboard", label: "Dashboard", icon: DashboardIcon, path: "/dashboard" },
+      { id: "invoice", label: "Invoice", icon: InvoiceIcon, path: "/invoice" },
+      { id: "reports", label: "Reports", icon: ReportsIcon, path: "/reports" },
+    ]
+  },
+  {
+    category: "CORE",
+    items: [
+      { id: "product", label: "Product", icon: ProductIcon, path: "/product" },
+      { id: "customers", label: "Customers", icon: CustomersIcon, path: "/customers" },
+      { id: "tax", label: "Tax / GST", icon: TaxIcon, path: "/tax" },
+    ]
+  }
 ];
 
 const NAV_ITEMS_BOTTOM = [
@@ -143,7 +152,7 @@ const NAV_ITEMS_BOTTOM = [
 ];
 
 /* ==========================================================================
-   STANDALONE SIDEBAR COMPONENT (Reusable for both interactive and static preview)
+   STANDALONE SIDEBAR COMPONENT (Exact Match to Image 1)
    ========================================================================== */
 export function MMSNavSidebar({ 
   isCollapsed, 
@@ -168,7 +177,11 @@ export function MMSNavSidebar({
       {/* Brand Header */}
       <div className="mms-brand-container">
         <div className="mms-logo-box">
-          <AnimsLogo />
+          <img 
+            src="/Images/logo.png" 
+            alt="Anims MMS" 
+            className="mms-logo-img"
+          />
         </div>
         {!isCollapsed && (
           <div className="mms-brand-text">
@@ -178,36 +191,47 @@ export function MMSNavSidebar({
         )}
       </div>
 
-      {/* Main Navigation Items */}
-      <ul className="mms-nav-group">
-        {NAV_ITEMS_MAIN.map((item) => {
-          const IconComp = item.icon;
-          const isActive = activeId === item.id;
-          return (
-            <li key={item.id}>
-              <div 
-                className={`mms-nav-item ${isActive ? "active" : ""}`}
-                onClick={() => onSelect && onSelect(item.id, item.path)}
-              >
-                <div className="mms-icon-wrapper">
-                  <IconComp 
-                    size={20} 
-                    color={isActive ? "#3177DB" : "#FFFFFF"} 
-                  />
-                </div>
-                {!isCollapsed && (
-                  <span className="mms-nav-label">{item.label}</span>
-                )}
-                {isCollapsed && (
-                  <div className="mms-tooltip">{item.label}</div>
-                )}
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+      {/* Navigation Sections: SALES & CORE */}
+      <div className="mms-nav-sections">
+        {NAV_SECTIONS.map((section) => (
+          <div key={section.category} className="mms-nav-section">
+            {!isCollapsed ? (
+              <div className="mms-section-label">{section.category}</div>
+            ) : (
+              <div className="mms-section-divider" />
+            )}
+            <ul className="mms-nav-group">
+              {section.items.map((item) => {
+                const IconComp = item.icon;
+                const isActive = activeId === item.id;
+                return (
+                  <li key={item.id}>
+                    <div 
+                      className={`mms-nav-item ${isActive ? "active" : ""}`}
+                      onClick={() => onSelect && onSelect(item.id, item.path)}
+                    >
+                      <div className="mms-icon-wrapper">
+                        <IconComp 
+                          size={19} 
+                          color={isActive ? "#FFFFFF" : "#475569"} 
+                        />
+                      </div>
+                      {!isCollapsed && (
+                        <span className="mms-nav-label">{item.label}</span>
+                      )}
+                      {isCollapsed && (
+                        <div className="mms-tooltip">{item.label}</div>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </div>
 
-      {/* Bottom Navigation Items */}
+      {/* Bottom Navigation Items: Print Studio & Settings */}
       <ul className="mms-nav-bottom-group">
         {NAV_ITEMS_BOTTOM.map((item) => {
           const IconComp = item.icon;
@@ -220,8 +244,8 @@ export function MMSNavSidebar({
               >
                 <div className="mms-icon-wrapper">
                   <IconComp 
-                    size={20} 
-                    color={isActive ? "#3177DB" : "#FFFFFF"} 
+                    size={19} 
+                    color={isActive ? "#FFFFFF" : "#475569"} 
                   />
                 </div>
                 {!isCollapsed && (
@@ -275,9 +299,12 @@ export default function DashboardLayout() {
   };
 
   const getActiveItemLabel = () => {
-    const allItems = [...NAV_ITEMS_MAIN, ...NAV_ITEMS_BOTTOM];
-    const match = allItems.find(item => item.id === activeTab);
-    return match ? match.label : "Invoice";
+    for (const sec of NAV_SECTIONS) {
+      const match = sec.items.find(item => item.id === activeTab);
+      if (match) return match.label;
+    }
+    const bottomMatch = NAV_ITEMS_BOTTOM.find(item => item.id === activeTab);
+    return bottomMatch ? bottomMatch.label : "Invoice";
   };
 
   return (

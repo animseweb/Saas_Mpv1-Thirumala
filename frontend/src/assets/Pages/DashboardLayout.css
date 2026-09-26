@@ -20,8 +20,8 @@
   position: relative;
   height: 100vh;
   min-height: 640px;
-  background-color: #3177DB;
-  background: linear-gradient(180deg, #3277DC 0%, #2D71D3 100%);
+  background-color: #FFFFFF;
+  border-right: 1px solid #E2E8F0;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -29,48 +29,48 @@
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
   flex-shrink: 0;
   user-select: none;
-  box-shadow: 3px 0 16px rgba(49, 119, 219, 0.15);
+  box-shadow: 2px 0 10px rgba(15, 23, 42, 0.02);
 }
 
 /* Expanded state width */
 .mms-sidebar.expanded {
-  width: 260px;
-  padding: 22px 14px;
+  width: 215px;
+  padding: 18px 10px;
 }
 
 /* Collapsed state width */
 .mms-sidebar.collapsed {
-  width: 72px;
-  padding: 22px 10px;
+  width: 68px;
+  padding: 18px 8px;
 }
 
 /* ==========================================================================
-   EDGE TOGGLE BUTTON (Chevron Left / Right on border)
+   EDGE TOGGLE BUTTON (White circular button with blue chevron)
    ========================================================================== */
 .mms-toggle-btn {
   position: absolute;
   right: -11px;
-  top: 74px;
+  top: 66px;
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background-color: #3177DB;
-  border: 1.5px solid #FFFFFF;
-  color: #FFFFFF;
+  background-color: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  color: #2563EB;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 100;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
-  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   outline: none;
 }
 
 .mms-toggle-btn:hover {
-  background-color: #2668C7;
-  transform: scale(1.1);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  border-color: #2563EB;
+  transform: scale(1.08);
+  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.2);
 }
 
 .mms-toggle-btn:active {
@@ -83,33 +83,37 @@
 .mms-brand-container {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 28px;
-  padding-left: 2px;
+  gap: 10px;
+  margin-bottom: 22px;
+  padding: 0 4px;
   text-decoration: none;
 }
 
 .mms-sidebar.collapsed .mms-brand-container {
   justify-content: center;
-  padding-left: 0;
+  padding: 0;
 }
 
 .mms-logo-box {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
   background-color: #FFFFFF;
-  border-radius: 10px;
+  border: 1px solid #E2E8F0;
+  border-radius: 7px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
   flex-shrink: 0;
-  transition: transform 0.2s ease;
+  padding: 3px;
+  box-sizing: border-box;
 }
 
-.mms-logo-box:hover {
-  transform: translateY(-1px);
+.mms-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .mms-brand-text {
@@ -117,32 +121,58 @@
   flex-direction: column;
   overflow: hidden;
   white-space: nowrap;
-  transition: opacity 0.25s ease, max-width 0.3s ease;
 }
 
 .mms-brand-title {
-  color: #FFFFFF;
-  font-size: 15.5px;
+  color: #1E293B;
+  font-size: 14.5px;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.25;
   letter-spacing: -0.2px;
 }
 
 .mms-brand-subtitle {
-  color: rgba(255, 255, 255, 0.84);
-  font-size: 11px;
+  color: #64748B;
+  font-size: 10.5px;
   font-weight: 400;
-  margin-top: 3px;
+  margin-top: 2px;
   letter-spacing: -0.1px;
 }
 
 /* ==========================================================================
-   NAVIGATION MENUS
+   NAVIGATION SECTIONS (SALES & CORE)
    ========================================================================== */
+.mms-nav-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mms-nav-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.mms-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 6px 10px 4px;
+  line-height: 1;
+}
+
+.mms-section-divider {
+  height: 1px;
+  background-color: #F1F5F9;
+  margin: 6px 4px;
+}
+
 .mms-nav-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 3px;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -150,10 +180,10 @@
 
 .mms-nav-bottom-group {
   margin-top: auto;
-  padding-top: 18px;
+  padding-top: 14px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 3px;
   list-style: none;
   padding-left: 0;
 }
@@ -164,53 +194,60 @@
   display: flex;
   align-items: center;
   border-radius: 9px;
-  color: #FFFFFF;
+  color: #334155;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.18s ease, color 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease;
+  transition: background-color 0.16s ease, color 0.16s ease;
   user-select: none;
 }
 
 /* Expanded state item */
 .mms-sidebar.expanded .mms-nav-item {
-  padding: 10px 14px;
-  gap: 14px;
+  padding: 9px 12px;
+  gap: 12px;
   width: 100%;
   box-sizing: border-box;
 }
 
 /* Collapsed state item */
 .mms-sidebar.collapsed .mms-nav-item {
-  padding: 10px 0;
+  padding: 9px 0;
   justify-content: center;
   width: 100%;
 }
 
 /* Hover state for inactive items */
 .mms-nav-item:not(.active):hover {
-  background-color: rgba(255, 255, 255, 0.14);
-  color: #FFFFFF;
+  background-color: #F1F5F9;
+  color: #0F172A;
 }
 
-/* ACTIVE STATE (e.g. Invoice in the image) */
+.mms-nav-item:not(.active):hover .mms-icon-wrapper svg {
+  stroke: #2563EB;
+}
+
+/* ACTIVE STATE (e.g. Invoice matching Image 1) */
 .mms-sidebar.expanded .mms-nav-item.active {
-  background-color: #FFFFFF;
-  color: #3177DB;
+  background-color: #2563EB;
+  color: #FFFFFF;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 }
 
 .mms-sidebar.collapsed .mms-nav-item.active {
   background-color: transparent;
-  color: #FFFFFF;
+  color: #2563EB;
 }
 
-/* In collapsed mode, active item has a neat white badge or active indicator */
 .mms-sidebar.collapsed .mms-nav-item.active .mms-icon-wrapper {
-  background-color: #FFFFFF;
-  color: #3177DB;
+  background-color: #2563EB;
+  color: #FFFFFF;
   border-radius: 8px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.25);
+}
+
+.mms-sidebar.collapsed .mms-nav-item.active .mms-icon-wrapper svg {
+  stroke: #FFFFFF;
 }
 
 /* Icon wrapper */
@@ -218,31 +255,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-  min-width: 24px;
-  transition: transform 0.15s ease, background-color 0.2s ease, color 0.2s ease;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  transition: transform 0.15s ease, color 0.15s ease;
 }
 
 .mms-sidebar.collapsed .mms-icon-wrapper {
-  width: 40px;
-  height: 40px;
-}
-
-.mms-nav-item:hover .mms-icon-wrapper {
-  transform: scale(1.05);
+  width: 38px;
+  height: 38px;
 }
 
 /* Nav Item Label */
 .mms-nav-label {
-  font-size: 14.2px;
+  font-size: 13.5px;
+  font-weight: 500;
   line-height: 1;
   white-space: nowrap;
   letter-spacing: -0.1px;
 }
 
 .mms-sidebar.expanded .mms-nav-item.active .mms-nav-label {
-  color: #3177DB;
+  color: #FFFFFF;
   font-weight: 600;
 }
 
