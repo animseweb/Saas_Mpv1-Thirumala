@@ -279,16 +279,16 @@ export default function DBLanding() {
             <CompanyBuildingIcon />
           </div>
           <div className="dbl__nav-meta">
-            <span className="dbl__nav-company">{currentUser.company}</span>
+            <span className="dbl__nav-company">Thirumala Fertilizer Company</span>
             <span className="dbl__nav-subtitle">{currentUser.fiscalYear}</span>
           </div>
         </div>
 
         {/* Right: Notifications, Help, Profile Avatar */}
         <div className="dbl__nav-right" ref={profileRef}>
-          <button 
-            type="button" 
-            className="dbl__nav-btn" 
+          <button
+            type="button"
+            className="dbl__nav-btn"
             title="Notifications"
             aria-label="Notifications"
           >
@@ -296,18 +296,18 @@ export default function DBLanding() {
             <span className="dbl__bell-dot" />
           </button>
 
-          <button 
-            type="button" 
-            className="dbl__nav-btn" 
+          <button
+            type="button"
+            className="dbl__nav-btn"
             title="Help & Support"
             aria-label="Help & Support"
           >
             <HelpCircleIcon />
           </button>
 
-          <button 
-            type="button" 
-            className="dbl__nav-avatar" 
+          <button
+            type="button"
+            className="dbl__nav-avatar"
             onClick={() => setShowProfile(!showProfile)}
             title="Account Menu"
             aria-label="Account Menu"
@@ -322,23 +322,23 @@ export default function DBLanding() {
                 <div className="dbl__profile-name">{currentUser.username}</div>
                 <div className="dbl__profile-email">{currentUser.company}</div>
               </div>
-              <button 
-                type="button" 
-                className="dbl__profile-item" 
+              <button
+                type="button"
+                className="dbl__profile-item"
                 onClick={() => navigate("/dashboard")}
               >
                 Go to Dashboard
               </button>
-              <button 
-                type="button" 
-                className="dbl__profile-item" 
+              <button
+                type="button"
+                className="dbl__profile-item"
                 onClick={() => navigate("/settings")}
               >
                 Account Settings
               </button>
-              <button 
-                type="button" 
-                className="dbl__profile-item dbl__profile-item--danger" 
+              <button
+                type="button"
+                className="dbl__profile-item dbl__profile-item--danger"
                 onClick={handleLogout}
               >
                 Sign out
@@ -365,16 +365,16 @@ export default function DBLanding() {
               </div>
             </div>
             <div className="dbl__banner-right">
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="dbl__upgrade-btn"
                 onClick={() => navigate("/tax")}
               >
                 Upgrade
               </button>
-              <button 
-                type="button" 
-                className="dbl__banner-close" 
+              <button
+                type="button"
+                className="dbl__banner-close"
                 onClick={() => setShowBanner(false)}
                 title="Dismiss"
                 aria-label="Dismiss banner"

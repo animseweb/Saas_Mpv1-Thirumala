@@ -226,6 +226,16 @@
   stroke: #2563EB;
 }
 
+/* Logout specific styling */
+.mms-nav-item.logout-item:not(.active):hover {
+  background-color: #FEF2F2;
+  color: #DC2626;
+}
+
+.mms-nav-item.logout-item:not(.active):hover .mms-icon-wrapper svg {
+  stroke: #DC2626;
+}
+
 /* ACTIVE STATE (e.g. Invoice matching Image 1) */
 .mms-sidebar.expanded .mms-nav-item.active {
   background-color: #2563EB;
@@ -813,13 +823,15 @@
   background-color: #FFFFFF;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: flex-start;
+  padding: 8px 20px 32px 20px;
+  box-sizing: border-box;
   overflow-y: auto;
 }
 
 .mms-dashboard-hero-img {
-  width: 100%;
-  max-width: 100%;
+  width: 88%;
+  max-width: 1420px;
   height: auto;
   display: block;
   object-fit: contain;

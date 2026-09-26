@@ -59,7 +59,7 @@ img {
     width: 100vw;
     height: 100vh;
     min-height: 600px;
-    background: radial-gradient(circle at 10% 15%, rgba(219, 234, 254, 0.45) 0%, #FFFFFF 50%, rgba(224, 236, 255, 0.35) 100%);
+    background: #F0F6FF;
     overflow: hidden;
     display: flex;
     font-family: 'Inter', sans-serif;
@@ -96,31 +96,32 @@ img {
 
 /* ================================================================
    BACKGROUND 3D ILLUSTRATION & S-CURVE WAVE
-   Scales to full viewport height without vertical cropping or distortion
+   Scales to fill the left half — illustration + wave as one unit
    ================================================================ */
 .lp__illus {
     position: absolute;
     top: 0;
     left: 0;
-    height: 100vh;
-    width: auto;
-    max-width: 65vw;
+    width: 58%;
+    height: 100%;
     pointer-events: none;
     z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .lp__illus picture {
     display: block;
-    height: 100vh;
-    width: auto;
+    width: 100%;
+    height: 100%;
 }
 
 .lp__illus-img {
-    height: 100vh;
-    width: auto;
-    max-width: none;
-    object-fit: contain;
-    object-position: left top;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left center;
     display: block;
 }
 
@@ -134,8 +135,8 @@ img {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: clamp(38px, 6vh, 58px) 4% clamp(32px, 5vh, 48px) clamp(44px, 5.8vw, 84px);
+    justify-content: flex-start;
+    padding: clamp(36px, 5.5vh, 56px) 4% clamp(28px, 4vh, 44px) clamp(44px, 5.8vw, 80px);
     box-sizing: border-box;
     pointer-events: none;
 }
@@ -149,7 +150,7 @@ img {
 .lp__brand-row {
     display: flex;
     align-items: flex-start;
-    gap: 8px;
+    gap: 10px;
     line-height: 1;
 }
 
@@ -157,7 +158,7 @@ img {
     font-family: 'Inter', sans-serif;
     font-style: italic;
     font-weight: 800;
-    font-size: clamp(32px, 3.5vw, 48px);
+    font-size: clamp(36px, 4vw, 54px);
     line-height: 1;
     color: #1E6FD9;
     letter-spacing: -0.5px;
@@ -173,7 +174,7 @@ img {
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 800;
-    font-size: clamp(32px, 3.5vw, 48px);
+    font-size: clamp(36px, 4vw, 54px);
     line-height: 1;
     color: #1E6FD9;
     letter-spacing: -0.5px;
@@ -183,14 +184,14 @@ img {
     width: 100%;
     margin-top: 6px;
     margin-bottom: 4px;
-    border-top: 2.2px solid var(--c-orange);
+    border-top: 2.4px solid var(--c-orange);
 }
 
 .lp__brand-mfg {
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: clamp(18px, 1.95vw, 26px);
+    font-size: clamp(18px, 2vw, 27px);
     line-height: 1.2;
     color: var(--c-blue-mfg);
     white-space: nowrap;
@@ -199,26 +200,26 @@ img {
 
 /* ── Material Management Software Tagline ───────────────────── */
 .lp__tagline {
-    margin-top: clamp(24px, 3.8vh, 42px);
+    margin-top: clamp(22px, 3.5vh, 40px);
     font-family: 'Inter', sans-serif;
     font-style: italic;
     font-weight: 700;
-    font-size: clamp(16px, 1.75vw, 24px);
+    font-size: clamp(17px, 1.9vw, 26px);
     color: var(--c-orange);
     letter-spacing: -0.2px;
 }
 
-/* ── Bottom Description Text (Directly below 3D illustration) ── */
+/* ── Bottom Description Text (below 3D illustration) ── */
 .lp__desc {
     position: absolute;
-    top: calc(70vh + 14px);
-    left: clamp(44px, 5.8vw, 84px);
-    max-width: 430px;
+    bottom: clamp(100px, 16vh, 200px);
+    left: clamp(44px, 5.8vw, 80px);
+    max-width: 390px;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    font-size: 13px;
-    line-height: 1.55;
-    color: #64748B;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #334155;
     z-index: 5;
     margin: 0;
 }
@@ -243,28 +244,28 @@ img {
 .lp__logo {
     display: flex;
     justify-content: center;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     width: 100%;
 }
 
 .lp__logo-img {
-    height: 70px;
+    height: 78px;
     width: auto;
-    max-height: 74px;
+    max-height: 82px;
     object-fit: contain;
 }
 
 /* ── White Login Card ───────────────────────────────────────── */
 .lp__card {
     width: 100%;
-    max-width: 405px;
+    max-width: 440px;
     background: #ffffff;
-    border-radius: 16px;
-    border: 1px solid rgba(226, 232, 240, 0.85);
-    box-shadow: 
-        0 10px 30px -4px rgba(15, 23, 42, 0.05),
-        0 2px 6px -1px rgba(15, 23, 42, 0.02);
-    padding: 30px 32px 22px 32px;
+    border-radius: 18px;
+    border: 1px solid rgba(226, 232, 240, 0.75);
+    box-shadow:
+        0 12px 36px -4px rgba(15, 23, 42, 0.08),
+        0 4px 12px -2px rgba(15, 23, 42, 0.04);
+    padding: 32px 36px 24px 36px;
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
@@ -272,16 +273,16 @@ img {
 
 /* ── Card Heading ───────────────────────────────────────────── */
 .lp__card-head {
-    margin-bottom: 16px;
+    margin-bottom: 18px;
 }
 
 .lp__title {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
-    font-size: 22px;
+    font-size: 24px;
     line-height: 1.3;
     color: #0F172A;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
 }
 
 .lp__subtitle {
@@ -309,7 +310,7 @@ img {
 .lp__form {
     display: flex;
     flex-direction: column;
-    gap: 13px;
+    gap: 14px;
 }
 
 .lp__field {
@@ -329,12 +330,12 @@ img {
 .lp__wrap {
     position: relative;
     width: 100%;
-    height: 41px;
+    height: 44px;
 }
 
 .lp__ico {
     position: absolute;
-    left: 12px;
+    left: 13px;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
@@ -346,11 +347,11 @@ img {
 
 .lp__inp {
     width: 100%;
-    height: 41px;
+    height: 44px;
     background: #ffffff;
     border: 1px solid #CBD5E1;
-    border-radius: 8px;
-    padding: 9px 12px 9px 38px;
+    border-radius: 9px;
+    padding: 10px 13px 10px 40px;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 13.5px;
@@ -369,7 +370,7 @@ img {
 }
 
 .lp__wrap--bare .lp__inp {
-    padding-left: 12px;
+    padding-left: 13px;
 }
 
 .lp__inp--ro {
@@ -381,7 +382,7 @@ img {
 
 /* ── Password Eye Toggle ────────────────────────────────────── */
 .lp__inp--pass {
-    padding-right: 38px;
+    padding-right: 40px;
 }
 
 .lp__pass-toggle {
@@ -392,8 +393,8 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     color: #94A3B8;
     transition: color 0.15s;
 }
@@ -411,7 +412,7 @@ img {
 
 .lp__forgot-link {
     font-family: 'Inter', sans-serif;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     color: #64748B;
     transition: color 0.15s;
@@ -429,21 +430,21 @@ img {
     justify-content: center;
     gap: 8px;
     width: 100%;
-    height: 42px;
-    margin-top: 4px;
+    height: 46px;
+    margin-top: 6px;
     background: #2563EB;
-    box-shadow: 0 1px 2px rgba(37, 99, 235, 0.15);
-    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.20);
+    border-radius: 9px;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 15px;
     color: #fff;
     transition: background .18s, box-shadow .18s, transform .1s;
 }
 
 .lp__btn:hover {
     background: #1D4ED8;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.28);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.32);
 }
 
 .lp__btn:active {
@@ -452,7 +453,7 @@ img {
 
 /* ── Card Footer ────────────────────────────────────────────── */
 .lp__footer {
-    margin-top: 18px;
+    margin-top: 20px;
     padding-top: 14px;
     border-top: 1px solid #F1F5F9;
     width: 100%;
@@ -464,7 +465,7 @@ img {
     font-size: 11px;
     color: #94A3B8;
     text-align: center;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
 }
 
 .lp__links {
@@ -478,7 +479,7 @@ img {
 .lp__link {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
-    font-size: 10.5px;
+    font-size: 11px;
     color: #94A3B8;
     transition: color .15s;
 }
@@ -498,12 +499,14 @@ img {
    ================================================================ */
 @media (max-width: 1024px) {
     .lp__illus {
-        max-width: 50vw;
+        width: 52%;
     }
+
     .lp__left {
         width: 50%;
         padding: 32px 3% 28px 5%;
     }
+
     .lp__right {
         width: 50%;
     }
@@ -516,25 +519,30 @@ img {
         height: auto;
         min-height: 100vh;
     }
+
     .lp__illus {
         display: none;
     }
+
     .lp__left {
         width: 100%;
         height: auto;
         padding: 36px 20px 20px 20px;
     }
+
     .lp__right {
         width: 100%;
         height: auto;
         padding: 20px;
     }
+
     .lp__card {
         max-width: 100%;
     }
+
     .lp__desc {
         position: relative;
-        top: auto;
+        bottom: auto;
         left: auto;
         margin-top: 16px;
         max-width: 100%;

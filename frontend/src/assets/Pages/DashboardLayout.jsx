@@ -11,15 +11,15 @@ import "./DashboardLayout.css";
 const AnimsLogo = () => (
   <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     {/* Stylized sharp pyramid / delta monogram */}
-    <path 
-      d="M16 4L6 22H11L16 12L21 22H26L16 4Z" 
-      fill="#132B5C" 
+    <path
+      d="M16 4L6 22H11L16 12L21 22H26L16 4Z"
+      fill="#132B5C"
     />
-    <path 
-      d="M13 23.5H19M11 26H21" 
-      stroke="#132B5C" 
-      strokeWidth="1.6" 
-      strokeLinecap="round" 
+    <path
+      d="M13 23.5H19M11 26H21"
+      stroke="#132B5C"
+      strokeWidth="1.6"
+      strokeLinecap="round"
     />
   </svg>
 );
@@ -109,6 +109,15 @@ const SettingsIcon = ({ size = 20, color = "currentColor" }) => (
   </svg>
 );
 
+/** 10. Logout Icon (Arrow exiting door) */
+const LogoutIcon = ({ size = 20, color = "currentColor" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+    <polyline points="16 17 21 12 16 7" />
+    <line x1="21" y1="12" x2="9" y2="12" />
+  </svg>
+);
+
 /** Double Chevrons for Edge Toggle */
 const ChevronsLeftIcon = () => (
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
@@ -149,23 +158,24 @@ const NAV_SECTIONS = [
 const NAV_ITEMS_BOTTOM = [
   { id: "print-studio", label: "Print Studio", icon: PrintStudioIcon, path: "/print-studio" },
   { id: "settings", label: "Settings", icon: SettingsIcon, path: "/settings" },
+  { id: "logout", label: "Logout", icon: LogoutIcon, path: null },
 ];
 
 /* ==========================================================================
    STANDALONE SIDEBAR COMPONENT (Exact Match to Image 1)
    ========================================================================== */
-export function MMSNavSidebar({ 
-  isCollapsed, 
-  onToggleCollapse, 
-  activeId = "invoice", 
-  onSelect 
+export function MMSNavSidebar({
+  isCollapsed,
+  onToggleCollapse,
+  activeId = "invoice",
+  onSelect
 }) {
   return (
     <aside className={`mms-sidebar ${isCollapsed ? "collapsed" : "expanded"}`}>
       {/* Edge Circular Toggle Button */}
       {onToggleCollapse && (
-        <button 
-          className="mms-toggle-btn" 
+        <button
+          className="mms-toggle-btn"
           onClick={onToggleCollapse}
           title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
           aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
@@ -177,9 +187,9 @@ export function MMSNavSidebar({
       {/* Brand Header */}
       <div className="mms-brand-container">
         <div className="mms-logo-box">
-          <img 
-            src="/Images/logo.png" 
-            alt="Anims MMS" 
+          <img
+            src="/Images/logo.png"
+            alt="Anims MMS"
             className="mms-logo-img"
           />
         </div>
@@ -206,14 +216,14 @@ export function MMSNavSidebar({
                 const isActive = activeId === item.id;
                 return (
                   <li key={item.id}>
-                    <div 
+                    <div
                       className={`mms-nav-item ${isActive ? "active" : ""}`}
                       onClick={() => onSelect && onSelect(item.id, item.path)}
                     >
                       <div className="mms-icon-wrapper">
-                        <IconComp 
-                          size={19} 
-                          color={isActive ? "#FFFFFF" : "#475569"} 
+                        <IconComp
+                          size={19}
+                          color={isActive ? "#FFFFFF" : "#475569"}
                         />
                       </div>
                       {!isCollapsed && (
@@ -231,21 +241,23 @@ export function MMSNavSidebar({
         ))}
       </div>
 
-      {/* Bottom Navigation Items: Print Studio & Settings */}
+      {/* Bottom Navigation Items: Print Studio, Settings & Logout */}
       <ul className="mms-nav-bottom-group">
         {NAV_ITEMS_BOTTOM.map((item) => {
           const IconComp = item.icon;
           const isActive = activeId === item.id;
+          const isLogout = item.id === "logout";
           return (
             <li key={item.id}>
-              <div 
-                className={`mms-nav-item ${isActive ? "active" : ""}`}
+              <div
+                className={`mms-nav-item ${isActive ? "active" : ""} ${isLogout ? "logout-item" : ""}`}
                 onClick={() => onSelect && onSelect(item.id, item.path)}
+                title={item.label}
               >
                 <div className="mms-icon-wrapper">
-                  <IconComp 
-                    size={19} 
-                    color={isActive ? "#FFFFFF" : "#475569"} 
+                  <IconComp
+                    size={19}
+                    color={isActive ? "#FFFFFF" : isLogout ? "#64748B" : "#475569"}
                   />
                 </div>
                 {!isCollapsed && (
@@ -290,8 +302,14 @@ export default function DashboardLayout() {
     setActiveTab(getInitialTab());
   }, [location.pathname]);
 
-  // Sync route with active item
+  // Sync route with active item or perform action
   const handleItemSelect = (id, path) => {
+    if (id === "logout") {
+      localStorage.removeItem("user");
+      localStorage.removeItem("ba_last_activity");
+      navigate("/login", { replace: true });
+      return;
+    }
     setActiveTab(id);
     if (path) {
       navigate(path);
@@ -322,15 +340,48 @@ export default function DashboardLayout() {
         {activeTab === "dashboard" ? (
           /* Exact Match to Dashboard Page Image */
           <div className="mms-dashboard-img-view">
-            <img 
-              src="/DBImg/Dashoard_page-0001.jpg" 
-              alt="Dashboard Overview" 
+            <img
+              src="/DBImg/Dashoard_page-0001.jpg"
+              alt="Dashboard Overview"
+              className="mms-dashboard-hero-img"
+            />
+          </div>
+        ) : activeTab === "product" ? (
+          /* Exact Match to Product Home Image */
+          <div className="mms-dashboard-img-view">
+            <img
+              src="/DBImg/PRODUCT MASTER.jpg"
+              alt="Product Home"
+              className="mms-dashboard-hero-img"
+            />
+          </div>
+        ) : activeTab === "customers" ? (
+          /* Exact Match to Customer Master Image */
+          <div className="mms-dashboard-img-view">
+            <img
+              src="/DBImg/customer%20master.jpg"
+              alt="Customer Master"
+              className="mms-dashboard-hero-img"
+            />
+          </div>
+        ) : activeTab === "tax" ? (
+          /* Exact Match to Create Tax Image */
+          <div className="mms-dashboard-img-view">
+            <img
+              src="/DBImg/cREATE%20TAX.jpg"
+              alt="Create Tax"
               className="mms-dashboard-hero-img"
             />
           </div>
         ) : activeTab === "invoice" ? (
-          /* Exact Match to Image 1 */
-          <Invoice />
+          /* Exact Match to Invoice Image */
+          <div className="mms-dashboard-img-view">
+            <img
+              src="/DBImg/iNVOICE%20SCEEN1.jpg"
+              alt="Invoice Screen"
+              className="mms-dashboard-hero-img"
+            />
+          </div>
         ) : (
           <>
             {/* Top Header Bar for other modules */}
@@ -350,9 +401,9 @@ export default function DashboardLayout() {
                     <circle cx="11" cy="11" r="8" />
                     <line x1="21" y1="21" x2="16.65" y2="16.65" />
                   </svg>
-                  <input 
-                    type="text" 
-                    placeholder="Search modules, materials..." 
+                  <input
+                    type="text"
+                    placeholder="Search modules, materials..."
                     className="mms-search-input"
                   />
                 </div>
@@ -371,14 +422,14 @@ export default function DashboardLayout() {
             <div className="mms-page-body">
               <div className="mms-table-card" style={{ padding: "48px 24px", textAlign: "center" }}>
                 <div style={{ maxWidth: "480px", margin: "0 auto" }}>
-                  <div style={{ 
-                    width: "56px", 
-                    height: "56px", 
-                    borderRadius: "14px", 
-                    background: "#EEF4FD", 
-                    color: "#3177DB", 
-                    display: "flex", 
-                    alignItems: "center", 
+                  <div style={{
+                    width: "56px",
+                    height: "56px",
+                    borderRadius: "14px",
+                    background: "#EEF4FD",
+                    color: "#3177DB",
+                    display: "flex",
+                    alignItems: "center",
                     justifyContent: "center",
                     margin: "0 auto 16px auto"
                   }}>
@@ -397,8 +448,8 @@ export default function DashboardLayout() {
                   <p style={{ color: "#64748B", fontSize: "14px", marginBottom: "20px" }}>
                     This is the workspace for {getActiveItemLabel()}. Click on <strong>Invoice</strong> in the sidebar to view the New Invoice form.
                   </p>
-                  <button 
-                    className="mms-btn-primary" 
+                  <button
+                    className="mms-btn-primary"
                     style={{ margin: "0 auto" }}
                     onClick={() => handleItemSelect("invoice", "/invoice")}
                   >

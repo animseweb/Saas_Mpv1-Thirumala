@@ -17,7 +17,7 @@ const PREDEFINED_COMPANIES = {
     "INFOCARE": "Anims Infocare Tech Solutions",
     "SAAS": "MMS SaaS Cloud Infrastructure",
     "GLOBAL": "Global Tech Materials Corp",
-    "ACME": "Acme Precision Engineering Pvt Ltd",
+    "STFC": "Thirumala Fertilizer Company",
 };
 
 function writeRightsCache(companyCode, username, rights = {}, isSuperAdmin = true) {
