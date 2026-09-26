@@ -1,0 +1,495 @@
+/* ==========================================================================
+   DBLanding.css — MMS SaaS Dashboard Landing Page
+   Exact 1:1 match to reference design
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --dbl-bg: #F8FAFC;
+    --dbl-border: #E2E8F0;
+    --dbl-border-light: #EEF2F6;
+    --dbl-text-primary: #1E293B;
+    --dbl-text-secondary: #64748B;
+    --dbl-text-muted: #94A3B8;
+    --dbl-blue: #2563EB;
+    --dbl-blue-hover: #1D4ED8;
+    --dbl-blue-light: #EFF6FF;
+    --dbl-blue-subtle: #DBEAFE;
+}
+
+/* ── Fullscreen Page Wrapper with Dot Matrix Background ────────── */
+.dbl {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--dbl-bg);
+    background-image: radial-gradient(#CBD5E1 1.3px, transparent 1.3px);
+    background-size: 38px 38px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--dbl-text-primary);
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   1. TOP NAVIGATION BAR
+   ════════════════════════════════════════════════════════════════ */
+.dbl__nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    height: 68px;
+    background: #FFFFFF;
+    border-bottom: 1px solid var(--dbl-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(24px, 4vw, 56px);
+    box-sizing: border-box;
+}
+
+.dbl__nav-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.dbl__nav-logo-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dbl__nav-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.dbl__nav-company {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--dbl-text-primary);
+    line-height: 1.25;
+    letter-spacing: -0.2px;
+}
+
+.dbl__nav-subtitle {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--dbl-text-secondary);
+    line-height: 1.2;
+    margin-top: 2px;
+}
+
+.dbl__nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    position: relative;
+}
+
+.dbl__nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dbl-text-primary);
+    border-radius: 50%;
+    position: relative;
+    transition: background-color 0.15s ease;
+}
+
+.dbl__nav-btn:hover {
+    background-color: #F1F5F9;
+}
+
+.dbl__bell-dot {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 7.5px;
+    height: 7.5px;
+    background-color: #EF4444;
+    border: 1.5px solid #FFFFFF;
+    border-radius: 50%;
+}
+
+.dbl__nav-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--dbl-blue);
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    border: none;
+}
+
+.dbl__nav-avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+}
+
+/* ── Profile Dropdown ── */
+.dbl__profile-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 220px;
+    background: #FFFFFF;
+    border: 1px solid var(--dbl-border);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    padding: 8px 0;
+    z-index: 100;
+    animation: dblFadeIn 0.15s ease-out;
+}
+
+@keyframes dblFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dbl__profile-head {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--dbl-border-light);
+}
+
+.dbl__profile-name {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--dbl-text-primary);
+}
+
+.dbl__profile-email {
+    font-size: 11.5px;
+    color: var(--dbl-text-secondary);
+    margin-top: 2px;
+}
+
+.dbl__profile-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 9px 16px;
+    background: none;
+    border: none;
+    font-size: 13px;
+    color: var(--dbl-text-primary);
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.dbl__profile-item:hover {
+    background-color: #F8FAFC;
+    color: var(--dbl-blue);
+}
+
+.dbl__profile-item--danger {
+    color: #DC2626;
+    border-top: 1px solid var(--dbl-border-light);
+    margin-top: 4px;
+}
+
+.dbl__profile-item--danger:hover {
+    background-color: #FEF2F2;
+    color: #DC2626;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   2. MAIN CONTENT AREA
+   ════════════════════════════════════════════════════════════════ */
+.dbl__main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 36px 20px 70px;
+    box-sizing: border-box;
+}
+
+/* ── Setup Progress Banner Card ──────────────────────────────── */
+.dbl__banner {
+    width: 100%;
+    max-width: 610px;
+    background: #FFFFFF;
+    border: 1px solid var(--dbl-border);
+    border-radius: 12px;
+    padding: 13px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    margin-bottom: 42px;
+    animation: dblFadeIn 0.3s ease-out;
+}
+
+.dbl__banner-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.dbl__banner-icon {
+    flex-shrink: 0;
+    color: var(--dbl-text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dbl__banner-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.dbl__banner-title {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--dbl-text-primary);
+    line-height: 1.3;
+}
+
+.dbl__banner-sub {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--dbl-text-secondary);
+    line-height: 1.35;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dbl__banner-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.dbl__upgrade-btn {
+    background-color: var(--dbl-blue);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 15px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.dbl__upgrade-btn:hover {
+    background-color: var(--dbl-blue-hover);
+    transform: translateY(-1px);
+}
+
+.dbl__banner-close {
+    background: none;
+    border: none;
+    color: var(--dbl-text-muted);
+    font-size: 15px;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: color 0.15s ease;
+}
+
+.dbl__banner-close:hover {
+    color: var(--dbl-text-primary);
+}
+
+/* ── Hero Heading & Subtitle ─────────────────────────────────── */
+.dbl__hero {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.dbl__title {
+    font-size: clamp(32px, 3.6vw, 46px);
+    font-weight: 800;
+    color: var(--dbl-text-primary);
+    letter-spacing: -0.8px;
+    line-height: 1.2;
+    margin: 0 0 12px 0;
+}
+
+.dbl__subtitle {
+    font-size: clamp(14px, 1.25vw, 15.5px);
+    font-weight: 400;
+    color: var(--dbl-text-secondary);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ── Search Input (Pill Shaped) ──────────────────────────────── */
+.dbl__search-wrapper {
+    width: 100%;
+    max-width: 660px;
+    margin-bottom: 54px;
+    position: relative;
+}
+
+.dbl__search-icon {
+    position: absolute;
+    left: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--dbl-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dbl__search-input {
+    width: 100%;
+    height: 52px;
+    background: #FFFFFF;
+    border: 1.5px solid var(--dbl-border);
+    border-radius: 9999px;
+    padding: 0 26px 0 56px;
+    font-family: inherit;
+    font-size: 14.5px;
+    color: var(--dbl-text-primary);
+    box-shadow: 0 4px 18px -2px rgba(15, 23, 42, 0.04);
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dbl__search-input::placeholder {
+    color: var(--dbl-text-muted);
+    font-size: 14px;
+}
+
+.dbl__search-input:focus {
+    border-color: var(--dbl-blue);
+    box-shadow: 0 4px 22px -1px rgba(37, 99, 235, 0.18);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   3. ACTION TILES GRID (2 ROWS)
+   ════════════════════════════════════════════════════════════════ */
+.dbl__tiles-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+    width: 100%;
+    max-width: 820px;
+}
+
+.dbl__tiles-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(28px, 4.5vw, 64px);
+    flex-wrap: wrap;
+}
+
+.dbl__tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dbl__tile:hover {
+    transform: translateY(-5px);
+}
+
+.dbl__tile-card {
+    width: 90px;
+    height: 90px;
+    background: #FFFFFF;
+    border: 1.2px solid var(--dbl-border);
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px -2px rgba(15, 23, 42, 0.04);
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.dbl__tile:hover .dbl__tile-card {
+    border-color: #93C5FD;
+    box-shadow: 0 12px 28px -4px rgba(37, 99, 235, 0.16);
+}
+
+.dbl__tile-label {
+    margin-top: 11px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #334155;
+    text-align: center;
+    white-space: nowrap;
+    transition: color 0.18s ease;
+}
+
+.dbl__tile:hover .dbl__tile-label {
+    color: var(--dbl-blue);
+}
+
+/* ── Responsive adjustments ─────────────────────────────────── */
+@media (max-width: 640px) {
+    .dbl__nav {
+        padding: 0 16px;
+    }
+
+    .dbl__banner-sub {
+        white-space: normal;
+    }
+
+    .dbl__banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .dbl__banner-right {
+        align-self: flex-end;
+    }
+
+    .dbl__tiles-row {
+        gap: 20px;
+    }
+
+    .dbl__tile-card {
+        width: 68px;
+        height: 68px;
+        border-radius: 16px;
+    }
+}
