@@ -162,6 +162,25 @@ const NAV_ITEMS_BOTTOM = [
 ];
 
 /* ==========================================================================
+   PAGE IMAGES CONFIGURATION (Persistent DOM mounting for instant fast switching)
+   ========================================================================== */
+export const TAB_IMAGES = [
+  { id: "dashboard", src: "/DBImg/Dashoard_page-0001.jpg", alt: "Dashboard Overview" },
+  { id: "product", src: "/DBImg/PRODUCT MASTER.jpg", alt: "Product Home" },
+  { id: "customers", src: "/DBImg/customer%20master.jpg", alt: "Customer Master" },
+  { id: "tax", src: "/DBImg/cREATE%20TAX.jpg", alt: "Create Tax" },
+  { id: "invoice", src: "/DBImg/iNVOICE%20SCEEN1.jpg", alt: "Invoice Screen" },
+];
+
+const prefetchTabImage = (id) => {
+  const match = TAB_IMAGES.find((t) => t.id === id);
+  if (match) {
+    const img = new Image();
+    img.src = match.src;
+  }
+};
+
+/* ==========================================================================
    STANDALONE SIDEBAR COMPONENT (Exact Match to Image 1)
    ========================================================================== */
 export function MMSNavSidebar({
@@ -219,6 +238,7 @@ export function MMSNavSidebar({
                     <div
                       className={`mms-nav-item ${isActive ? "active" : ""}`}
                       onClick={() => onSelect && onSelect(item.id, item.path)}
+                      onMouseEnter={() => prefetchTabImage(item.id)}
                     >
                       <div className="mms-icon-wrapper">
                         <IconComp
@@ -252,6 +272,7 @@ export function MMSNavSidebar({
               <div
                 className={`mms-nav-item ${isActive ? "active" : ""} ${isLogout ? "logout-item" : ""}`}
                 onClick={() => onSelect && onSelect(item.id, item.path)}
+                onMouseEnter={() => prefetchTabImage(item.id)}
                 title={item.label}
               >
                 <div className="mms-icon-wrapper">
@@ -281,6 +302,7 @@ export function MMSNavSidebar({
 export default function DashboardLayout() {
   const location = useLocation();
   const navigate = useNavigate();
+  const mainContentRef = React.useRef(null);
 
   const getInitialTab = () => {
     const path = location.pathname.toLowerCase();
@@ -298,9 +320,25 @@ export default function DashboardLayout() {
   const [collapsed, setCollapsed] = useState(false);
   const [activeTab, setActiveTab] = useState(getInitialTab);
 
+  // Sync tab with URL
   useEffect(() => {
     setActiveTab(getInitialTab());
   }, [location.pathname]);
+
+  // Preload all dashboard images in background as soon as component mounts
+  useEffect(() => {
+    TAB_IMAGES.forEach((tab) => {
+      const img = new Image();
+      img.src = tab.src;
+    });
+  }, []);
+
+  // Reset scroll to top when changing active tab
+  useEffect(() => {
+    if (mainContentRef.current) {
+      mainContentRef.current.scrollTop = 0;
+    }
+  }, [activeTab]);
 
   // Sync route with active item or perform action
   const handleItemSelect = (id, path) => {
@@ -325,6 +363,8 @@ export default function DashboardLayout() {
     return bottomMatch ? bottomMatch.label : "Invoice";
   };
 
+  const hasMatchingImage = TAB_IMAGES.some((t) => t.id === activeTab);
+
   return (
     <div className="mms-dashboard-wrapper">
       {/* 1. Primary Interactive Sidebar (Existing Blue Color Sidebar Intact) */}
@@ -336,53 +376,29 @@ export default function DashboardLayout() {
       />
 
       {/* 2. Main Workspace Content Area */}
-      <main className="mms-main-content">
-        {activeTab === "dashboard" ? (
-          /* Exact Match to Dashboard Page Image */
-          <div className="mms-dashboard-img-view">
-            <img
-              src="/DBImg/Dashoard_page-0001.jpg"
-              alt="Dashboard Overview"
-              className="mms-dashboard-hero-img"
-            />
-          </div>
-        ) : activeTab === "product" ? (
-          /* Exact Match to Product Home Image */
-          <div className="mms-dashboard-img-view">
-            <img
-              src="/DBImg/PRODUCT MASTER.jpg"
-              alt="Product Home"
-              className="mms-dashboard-hero-img"
-            />
-          </div>
-        ) : activeTab === "customers" ? (
-          /* Exact Match to Customer Master Image */
-          <div className="mms-dashboard-img-view">
-            <img
-              src="/DBImg/customer%20master.jpg"
-              alt="Customer Master"
-              className="mms-dashboard-hero-img"
-            />
-          </div>
-        ) : activeTab === "tax" ? (
-          /* Exact Match to Create Tax Image */
-          <div className="mms-dashboard-img-view">
-            <img
-              src="/DBImg/cREATE%20TAX.jpg"
-              alt="Create Tax"
-              className="mms-dashboard-hero-img"
-            />
-          </div>
-        ) : activeTab === "invoice" ? (
-          /* Exact Match to Invoice Image */
-          <div className="mms-dashboard-img-view">
-            <img
-              src="/DBImg/iNVOICE%20SCEEN1.jpg"
-              alt="Invoice Screen"
-              className="mms-dashboard-hero-img"
-            />
-          </div>
-        ) : (
+      <main className="mms-main-content" ref={mainContentRef}>
+        {/* All page images are permanently mounted in the DOM for instant 0ms switching */}
+        {TAB_IMAGES.map((tab) => {
+          const isActive = activeTab === tab.id;
+          return (
+            <div
+              key={tab.id}
+              className={`mms-dashboard-img-view ${isActive ? "mms-active-view" : "mms-hidden-view"}`}
+              style={{ display: isActive ? "flex" : "none" }}
+            >
+              <img
+                src={tab.src}
+                alt={tab.alt}
+                className="mms-dashboard-hero-img"
+                loading="eager"
+                fetchpriority={isActive ? "high" : "low"}
+                decoding="async"
+              />
+            </div>
+          );
+        })}
+
+        {!hasMatchingImage && (
           <>
             {/* Top Header Bar for other modules */}
             <header className="mms-top-header">

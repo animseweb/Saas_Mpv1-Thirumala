@@ -31,16 +31,19 @@ export default function Router() {
             {/* Protected routes – only accessible after login */}
             <Route path="/landing"              element={<ProtectedRoute><DBLanding /></ProtectedRoute>} />
             <Route path="/db-landing"           element={<ProtectedRoute><DBLanding /></ProtectedRoute>} />
-            <Route path="/dashboard"            element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
-            <Route path="/invoice"              element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
-            <Route path="/tax"                  element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
-            <Route path="/company"              element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
-            <Route path="/product"              element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
-            <Route path="/customers"            element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
-            <Route path="/reports"              element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
-            <Route path="/print-studio"         element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
-            <Route path="/settings"             element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
-            <Route path="/AnimsBusinessAnalytics" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
+            {/* Dashboard Layout & Modules - stays mounted so images never reload or flicker */}
+            <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
+                <Route path="/dashboard"            element={null} />
+                <Route path="/invoice"              element={null} />
+                <Route path="/tax"                  element={null} />
+                <Route path="/company"              element={null} />
+                <Route path="/product"              element={null} />
+                <Route path="/customers"            element={null} />
+                <Route path="/reports"              element={null} />
+                <Route path="/print-studio"         element={null} />
+                <Route path="/settings"             element={null} />
+                <Route path="/AnimsBusinessAnalytics" element={null} />
+            </Route>
 
             {/* Catch-all → login if not authenticated */}
             <Route path="*" element={<Navigate to="/login" replace />} />
