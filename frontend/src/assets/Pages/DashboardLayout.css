@@ -803,3 +803,25 @@
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(49, 119, 219, 0.25);
 }
+
+/* ==========================================================================
+   DASHBOARD HERO IMAGE VIEW (Matches Dashoard_page-0001.jpg)
+   ========================================================================== */
+.mms-dashboard-img-view {
+  width: 100%;
+  min-height: 100%;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow-y: auto;
+}
+
+.mms-dashboard-hero-img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  object-position: top left;
+}

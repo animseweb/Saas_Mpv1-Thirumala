@@ -319,7 +319,16 @@ export default function DashboardLayout() {
 
       {/* 2. Main Workspace Content Area */}
       <main className="mms-main-content">
-        {activeTab === "invoice" ? (
+        {activeTab === "dashboard" ? (
+          /* Exact Match to Dashboard Page Image */
+          <div className="mms-dashboard-img-view">
+            <img 
+              src="/DBImg/Dashoard_page-0001.jpg" 
+              alt="Dashboard Overview" 
+              className="mms-dashboard-hero-img"
+            />
+          </div>
+        ) : activeTab === "invoice" ? (
           /* Exact Match to Image 1 */
           <Invoice />
         ) : (
