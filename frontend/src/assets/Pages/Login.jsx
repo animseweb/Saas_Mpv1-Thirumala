@@ -202,14 +202,15 @@ export default function LoginPage() {
             {/* Background 3D Illustration & Curved Wave Layer */}
             <div className="lp__illus">
                 <picture>
-                    <source srcSet="/Images/login_hero_1200.webp" media="(max-width: 1200px)" type="image/webp" />
+                    <source srcSet="/Images/login_hero_1200.webp" media="(max-width: 1920px)" type="image/webp" />
                     <source srcSet="/Images/login_hero.webp" type="image/webp" />
                     <img
-                        src="/Images/login_hero.webp"
+                        src="/Images/login_hero_1200.webp"
                         alt="Anims MMS Analytics"
                         className="lp__illus-img"
                         loading="eager"
-                        decoding="sync"
+                        fetchpriority="high"
+                        decoding="async"
                     />
                 </picture>
             </div>

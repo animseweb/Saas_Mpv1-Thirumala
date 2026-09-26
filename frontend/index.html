@@ -11,6 +11,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <!-- High Priority Preload for Login Screen Illustration (loads immediately with HTML) -->
+  <link rel="preload" as="image" href="/Images/login_hero_1200.webp" type="image/webp" media="(max-width: 1920px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="/Images/login_hero.webp" type="image/webp" media="(min-width: 1921px)" fetchpriority="high" />
+
   <!-- Prefetch dashboard images in background for instant sidebar switching -->
   <link rel="prefetch" href="/DBImg/Dashoard_page-0001.jpg" as="image" />
   <link rel="prefetch" href="/DBImg/PRODUCT%20MASTER.jpg" as="image" />
